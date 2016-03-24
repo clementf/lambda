@@ -21,16 +21,16 @@ exports.generate = function(db, callback) {
 			}
 		}, {
 			$project: {
-				"theminutes": {
+				"minutes": {
 					$minute: "$date"
 				},
-				"thehour": {
+				"hour": {
 					"$hour": "$date"
 				},
-				"themonth": {
+				"month": {
 					$month: "$date"
 				},
-				"theday": {
+				"day": {
 					$dayOfMonth: "$date"
 				},
 				"weight": 1
@@ -39,10 +39,10 @@ exports.generate = function(db, callback) {
 		}, {
 			$group: {
 				"_id": {
-					"minutes": "$theminutes",
-					"hour": "$thehour",
-					"day": "$theday",
-					"month": "$themonth"
+					"minutes": "$minutes",
+					"hour": "$hour",
+					"day": "$day",
+					"month": "$month"
 				},
 				"avg_weight": {
 					$avg: "$weight"
@@ -79,13 +79,13 @@ exports.generate = function(db, callback) {
 			}
 		}, {
 			$project: {
-				"thehour": {
+				"hour": {
 					"$hour": "$date"
 				},
-				"themonth": {
+				"month": {
 					$month: "$date"
 				},
-				"theday": {
+				"day": {
 					$dayOfMonth: "$date"
 				},
 				"weight": 1
@@ -94,9 +94,9 @@ exports.generate = function(db, callback) {
 		}, {
 			$group: {
 				"_id": {
-					"hour": "$thehour",
-					"day": "$theday",
-					"month": "$themonth"
+					"hour": "$hour",
+					"day": "$day",
+					"month": "$month"
 				},
 				"avg_weight": {
 					$avg: "$weight"
@@ -134,10 +134,10 @@ exports.generate = function(db, callback) {
 			}
 		}, {
 			$project: {
-				"themonth": {
+				"month": {
 					$month: "$date"
 				},
-				"theday": {
+				"day": {
 					$dayOfMonth: "$date"
 				},
 				"weight": 1
@@ -146,8 +146,8 @@ exports.generate = function(db, callback) {
 		}, {
 			$group: {
 				"_id": {
-					"day": "$theday",
-					"month": "$themonth"
+					"day": "$day",
+					"month": "$month"
 				},
 				"avg_weight": {
 					$avg: "$weight"

@@ -1,49 +1,34 @@
 var MongoClient = require('mongodb').MongoClient;
 var async = require('async');
+var template = require('./template').template;
+
+
 exports.generate = function(db, callback) {
 
 	var logs = db.collection('logs_raw');
 	var code_m = db.collection('code_m');
+	code_m.remove();
 	var code_h = db.collection('code_h');
+	code_h.remove();
 	var code_d = db.collection('code_d');
+	code_d.remove();
+
 
 	/**
 	 * BY MINUTES
 	 */
 
 	var c_m = function(callback) {
-		console.log('Calling code for minutes');
-		logs.aggregate([{
-			$project: {
-				"theminutes": {
-					$minute: "$date"
-				},
-				"thehour": {
-					"$hour": "$date"
-				},
-				"themonth": {
-					$month: "$date"
-				},
-				"theday": {
-					$dayOfMonth: "$date"
-				},
-				"code": "$code"
+		console.log('Calling code for minute');
 
-			}
-		}, {
-			$group: {
-				"_id": {
-					"code": "$code",
-					"minutes": "$theminutes",
-					"hour": "$thehour",
-					"day": "$theday",
-					"month": "$themonth"
-				},
-				"count": {
-					$sum: 1
-				}
-			}
-		}]).toArray(function(err, results) {
+
+		template[0].$project.code = "$code";
+		template[1].$group._id.code = "$code";
+		template[1].$group.count = {
+			$sum: 1
+		};
+
+		logs.aggregate(template).toArray(function(err, results) {
 			async.each(results, function(res, cb) {
 				code_m.save(res, function(err, res) {
 					if (!err)
@@ -66,33 +51,10 @@ exports.generate = function(db, callback) {
 
 	var c_h = function(callback) {
 		console.log('Calling code for hours');
-		logs.aggregate([{
-			$project: {
-				"thehour": {
-					"$hour": "$date"
-				},
-				"themonth": {
-					$month: "$date"
-				},
-				"theday": {
-					$dayOfMonth: "$date"
-				},
-				"code": "$code"
 
-			}
-		}, {
-			$group: {
-				"_id": {
-					"code": "$code",
-					"hour": "$thehour",
-					"day": "$theday",
-					"month": "$themonth"
-				},
-				"count": {
-					$sum: 1
-				}
-			}
-		}]).toArray(function(err, results) {
+		delete template[1].$group._id.minute;
+
+		logs.aggregate(template).toArray(function(err, results) {
 			async.each(results, function(res, cb) {
 				code_h.save(res, function(err, res) {
 					if (!err)
@@ -116,29 +78,10 @@ exports.generate = function(db, callback) {
 
 	var c_d = function(callback) {
 		console.log('Calling code for days');
-		logs.aggregate([{
-			$project: {
-				"themonth": {
-					$month: "$date"
-				},
-				"theday": {
-					$dayOfMonth: "$date"
-				},
-				"code": "$code"
 
-			}
-		}, {
-			$group: {
-				"_id": {
-					"code": "$code",
-					"day": "$theday",
-					"month": "$themonth"
-				},
-				"count": {
-					$sum: 1
-				}
-			}
-		}]).toArray(function(err, results) {
+		delete template[1].$group._id.hour;
+
+		logs.aggregate(template).toArray(function(err, results) {
 			async.each(results, function(res, cb) {
 				code_d.save(res, function(err, res) {
 					if (!err)
@@ -159,8 +102,8 @@ exports.generate = function(db, callback) {
 
 	async.parallel([
 			c_m,
-			c_d,
-			c_h
+			c_h,
+			c_d
 		],
 		function(err, results) {
 			callback(err);
