@@ -1,9 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var async = require('async');
-var template = require('./template').template;
-
 
 exports.generate = function(db, callback) {
+	var template = JSON.parse(JSON.stringify(require('./template').template));		
 
 	var logs = db.collection('logs_raw');
 	var url_m = db.collection('url_m');
