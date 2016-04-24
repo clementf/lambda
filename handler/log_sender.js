@@ -1,6 +1,6 @@
 var amqp = require('amqplib/callback_api');
 var Tail = require('tail').Tail;
-tail = new Tail("/var/log/nginx/gogo.log");
+tail = new Tail("/usr/local/var/log/nginx/access.log");
 
 
 amqp.connect('amqp://localhost', function(err, conn) {

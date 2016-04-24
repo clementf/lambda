@@ -13,7 +13,7 @@ app.use(router);
 
 
 var oneDay = 86400000;
-app.use(express.static('dashboard'));
+app.use(express.static(__dirname + '/dashboard'));
 
 app.use('/', function(req, res){
 	res.sendFile(__dirname + '/dashboard/index.html')
