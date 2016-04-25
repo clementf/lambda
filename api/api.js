@@ -5,16 +5,15 @@ var path = require('path');
 
 app.set('port', process.env.PORT || 5000);
 
-
+//Use of our router (router.js)
 var router = require('./router');
 app.use(router);
 
 //Static content
-
-
 var oneDay = 86400000;
 app.use(express.static(__dirname + '/dashboard'));
 
+//Send static html file
 app.use('/', function(req, res){
 	res.sendFile(__dirname + '/dashboard/index.html')
 });
