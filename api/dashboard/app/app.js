@@ -1,8 +1,8 @@
 var getCode = function(type){
     $.get('api/code/' + type, function(data) {
         var labels = [];
-        var series = {};
-        for (var i = data.length - 1; i >= 0; i--) {
+        var series = {};        
+        for (var i = 0; i < data.length; i++) {
             
             if(type == "m"){
                 data[i].date = new Date(2016, data[i]._id.month - 1, data[i]._id.day, data[i]._id.hour, data[i]._id.minute);
@@ -33,7 +33,7 @@ var getUrl = function(type){
     $.get('api/url/' + type, function(data) {
         var labels = [];
         var series = [];
-        for (var i = data.length - 1; i >= 0; i--) {
+        for (var i = 0; i < data.length; i++) {
             
             if(type == "m"){
                 data[i].date = new Date(2016, data[i]._id.month - 1, data[i]._id.day, data[i]._id.hour, data[i]._id.minute);

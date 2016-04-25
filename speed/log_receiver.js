@@ -17,7 +17,7 @@ amqp.connect('amqp://localhost', function(err, conn) {
             ch.consume(q.queue, function(msg) {                    
                 //get the message and save it to the database                    
                 var log = JSON.parse(msg.content);
-                
+                console.log("receiving");
                 //Format the date to real date format for mongodb storage
                 log.date = new Date(log.date);
                 log.weight = parseInt(log.weight);

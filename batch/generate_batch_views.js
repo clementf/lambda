@@ -10,6 +10,7 @@ var url = require('./batch_url');
 var dbUrl = 'mongodb://localhost:27017/lambda';
 
 MongoClient.connect(dbUrl, function(err, db) {
+	console.log('Generating batch views');
 
 	async.parallel([
 			verb.generate.bind(null, db),

@@ -8,7 +8,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'code': log.code
             }
 
@@ -42,7 +42,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
                 'code': log.code
             }
@@ -76,7 +76,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
                 'minute': log.date.getMinutes(),
                 'code': log.code
@@ -111,7 +111,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
             }
             if (!reply) {
                 client.set('url_d', JSON.stringify([{
@@ -143,7 +143,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
             }
             if (!reply) {
@@ -176,7 +176,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
                 'minute': log.date.getMinutes(),
             }
@@ -210,7 +210,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'verb': log.verb
             }
             if (!reply) {
@@ -243,7 +243,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
                 'verb': log.verb
             }
@@ -277,7 +277,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
                 'minute': log.date.getMinutes(),
                 'verb': log.verb
@@ -312,7 +312,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'weight': log.weight
             }
             if (!reply) {
@@ -345,7 +345,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
                 'weight': log.weight
             }
@@ -379,7 +379,7 @@ exports.update = function(log) {
             reply = JSON.parse(reply);
             object = {
                 'day': log.date.getDate(),
-                'month': log.date.getMonth(),
+                'month': log.date.getMonth() + 1,
                 'hour': log.date.getHours(),
                 'minute': log.date.getMinutes(),
                 'weight': log.weight

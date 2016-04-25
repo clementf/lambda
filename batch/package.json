@@ -11,6 +11,7 @@
   "dependencies": {
     "amqplib": "^0.4.1",
     "async": "^1.5.2",
-    "mongodb": "^2.1.11"
+    "mongodb": "^2.1.11",
+    "redis": "^2.5.3"
   }
 }

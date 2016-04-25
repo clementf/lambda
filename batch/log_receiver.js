@@ -8,6 +8,7 @@ amqp.connect('amqp://localhost', function(err, conn) {
 
         MongoClient.connect(url, function(err, db) {            
             var logs = db.collection('logs_raw');
+            console.log('Log receiver connected to mongodb');
 
             ch.assertExchange(channel, 'fanout', {
                 durable: false

@@ -1,12 +1,13 @@
 var amqp = require('amqplib/callback_api');
 var Tail = require('tail').Tail;
-tail = new Tail("/usr/local/var/log/nginx/access.log");
+tail = new Tail("/var/log/nginx/gogo.log");
 
 
 amqp.connect('amqp://localhost', function(err, conn) {
 	conn.createChannel(function(err, ch) {
 		var channel = 'logs';
 		tail.on("line", function(data) {
+			console.log("sending one line");
 			//parse the log with regex to get good infos
 			var toSend = '';			
 			toSend = dissect(data);
